@@ -1,0 +1,12 @@
+.row{
+    margin: 8% auto;
+    max-width: 80%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, mimax(257px, 1fr));
+}
+
+.row .card{
+    text-align: center;
+    height: 272px;
+    
+}
