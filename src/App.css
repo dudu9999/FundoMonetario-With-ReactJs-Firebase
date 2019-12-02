@@ -1,9 +1,11 @@
+@import '~antd/dist/antd.css';
 @import '~@fortawesome/fontawesome-free/css/all.css';
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  background-color: #d3d3d3;
+  background-color: #D3D3D3;
   height: auto;
 }

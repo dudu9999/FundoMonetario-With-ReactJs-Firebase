@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Home.css';
-import 'components/FundoCapitalCard/FundoCapitalCard';
 import FundoCapitalCard from 'components/FundoCapitalCard/FundoCapitalCard';
+import CadastroFundoModal from 'components/CadastroFundoModal/CadastroFundoModal';
+import FundoCapitalVazio from 'components/FundoCapitalVazio/FundoCapitalVazio';
 
 const Home = () => {
+    const [visivel, setVisivel] = useState(false)
+    const [fundoSelecionado, setFundoSelecionado] = useState(false)
+
     const fundos = [ 
         {
             id: 1,
@@ -16,62 +20,59 @@ const Home = () => {
         {
             id: 2,
             nome: "Fundo teste 2",
-            valorAtual: 400,
-            valorNecessario: 1500,
-            porcentagem: 50,
-            dataResgate: new Date().toISOString()
-        },
-        {
-            id: 3,
-            nome: "Fundo teste 3",
-            valorAtual: 100,
-            valorNecessario: 500,
-            porcentagem: 45,
-            dataResgate: new Date().toISOString()
-        },
-        {
-            id: 4,
-            nome: "Fundo teste 4",
-            valorAtual: 2050,
-            valorNecessario: 3000,
-            porcentagem: 30,
-            dataResgate: new Date().toISOString()
-        },
-        {
-            id: 5,
-            nome: "Fundo teste 5",
             valorAtual: 1000,
             valorNecessario: 2000,
             porcentagem: 25,
             dataResgate: new Date().toISOString()
         },
         {
-            id: 6,
-            nome: "Fundo teste 6",
-            valorAtual: 250,
-            valorNecessario: 2500,
-            porcentagem: 10,
+            id: 3,
+            nome: "Fundo teste 3",
+            valorAtual: 400,
+            valorNecessario: 1500,
+            porcentagem: 50,
             dataResgate: new Date().toISOString()
         },
         
     ]
 
+    const editarFundo = fundo => {
+        setVisivel(true);
+        setFundoSelecionado(fundo);
+        console.log('editando o fundo ' + fundo.id)
+    };
+
+    const removerFundo = async fundo => {
+        setVisivel(true);
+        console.log('removendo o fundo ' + fundo.id)
+    };
+
+    const onClose = () => {
+        setVisivel(false);
+    };
+
 
     return ( 
-    <div className="row">
-        <div className="card">
-            {
-                fundos.map(fundo => (
-                    <FundoCapitalCard 
-                    key={fundo.id}
-                    porcentagem={fundo.porcentagem}
-                    nome={fundo.nome}
-                    valorAtual={fundo.valorAtual}
-                    />
-                ))
-            }
-        </div>
-    </div> 
+        <div className="row">
+                {
+                    fundos.map(fundo => (
+                        <FundoCapitalCard 
+                            key={fundo.id}
+                            porcentagem={fundo.porcentagem}
+                            nome={fundo.nome}
+                            valorAtual={fundo.valorAtual}
+                            editarFundoHandle={() => editarFundo(fundo)}
+                            removerFundoHandle={() => removerFundo(fundo)}
+                        />
+                    ))
+                }
+                <FundoCapitalVazio onClick={() => editarFundo({
+                    dataResgate: undefined,
+                    valorAtual: 0,
+                    valorNecessario: 0
+                })}/>
+                <CadastroFundoModal visivel={visivel} onClose={onClose} fundo={fundoSelecionado}/>
+        </div> 
     );
 }
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import './FundoCapitalCard.css';
+import { Progress } from 'antd';
+import accounting from 'accounting'
 
 const FundoCapitalCard = (props) => {
     return (   
@@ -10,6 +12,15 @@ const FundoCapitalCard = (props) => {
 
                 </div>
                 <div className="card-content">
+                    <Progress
+                    type="dashboard"
+                    width={175}
+                    percent={props.porcentagem}
+                    strokeWidth={9}
+                    strokeColor="#001AA0"
+                    format={() => accounting.formatMoney(props.valorAtual, "R$ ", 2, ".", ",")}
+                    ></Progress>
+
                 </div>
     
                 <div className="card-footer">

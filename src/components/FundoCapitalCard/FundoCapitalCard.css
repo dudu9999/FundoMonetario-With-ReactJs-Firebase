@@ -3,7 +3,7 @@
     margin: .5rem 0 1rem 0;
     border-radius: 2px;
     background-color: #fff;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.14) ;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.14);
 }
 
 .card .card-content{
@@ -13,4 +13,20 @@
 .card .card-footer{
     border-top: 1px solid #ccc;
     padding: 16px 24px;
+}
+
+.card .card-icon {
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+}
+
+.fas.fa-pen, .fas.fa-times {
+    color: #001AA0;
+    margin-left: 20px;
+}
+
+.ant-progress-text {
+    font-size: 20px;
 }
