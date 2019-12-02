@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react';
 import './CadastroFundoModal.css';
 import { Modal, Button, Form, Input, InputNumber, DatePicker} from 'antd';
 import moment from 'moment';
+import database from 'services/database';
+//import { database } from 'firebase';
+
 
 const CadastroFundoModal = (props) => {
     const [nome, setNome] = useState('');
@@ -23,9 +26,26 @@ const CadastroFundoModal = (props) => {
         props.onClose();
     }
 
-    const handleOk = () => {
+    const handleOk = async () => {
+        
+        if (props.fundo.id){
+            await database.editarFundo(props.fundo.id, {
+                nome,
+                valorAtual,
+                valorNecessario,
+                dataResgate: dataResgate ? dataResgate.toISOString() : null
+            });
+        }else{
+            await database.adcionarFundo({
+                nome,
+                valorAtual,
+                valorNecessario,
+                dataResgate: dataResgate ? dataResgate.toISOString() : null
+            });
+        }
         props.onCLose();
     }
+
 
     return ( 
         <Modal title="Criar fundo de Capital" visible={props.visivel} onCancel={handleCancel}
