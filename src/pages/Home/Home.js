@@ -1,40 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.css';
 import FundoCapitalCard from 'components/FundoCapitalCard/FundoCapitalCard';
 import CadastroFundoModal from 'components/CadastroFundoModal/CadastroFundoModal';
 import FundoCapitalVazio from 'components/FundoCapitalVazio/FundoCapitalVazio';
+import database from 'services/database';
 
 const Home = () => {
     const [visivel, setVisivel] = useState(false)
     const [fundoSelecionado, setFundoSelecionado] = useState(false)
+    const [fundos, setfundos ] = useState([]);
 
-    const fundos = [ 
-        {
-            id: 1,
-            nome: "Fundo teste 1",
-            valorAtual: 250,
-            valorNecessario: 2500,
-            porcentagem: 10,
-            dataResgate: new Date().toISOString()
-        },
-        {
-            id: 2,
-            nome: "Fundo teste 2",
-            valorAtual: 1000,
-            valorNecessario: 2000,
-            porcentagem: 25,
-            dataResgate: new Date().toISOString()
-        },
-        {
-            id: 3,
-            nome: "Fundo teste 3",
-            valorAtual: 400,
-            valorNecessario: 1500,
-            porcentagem: 50,
-            dataResgate: new Date().toISOString()
-        },
-        
-    ]
+    useEffect(() => {
+        database.listarFundos().then(response => {
+            setfundos(response);
+        });
+    }, []);
 
     const editarFundo = fundo => {
         setVisivel(true);
@@ -77,3 +57,31 @@ const Home = () => {
 }
 
 export default Home;
+
+    /*const fundos = [ 
+        {
+            id: 1,
+            nome: "Fundo teste 1",
+            valorAtual: 250,
+            valorNecessario: 2500,
+            porcentagem: 10,
+            dataResgate: new Date().toISOString()
+        },
+        {
+            id: 2,
+            nome: "Fundo teste 2",
+            valorAtual: 1000,
+            valorNecessario: 2000,
+            porcentagem: 25,
+            dataResgate: new Date().toISOString()
+        },
+        {
+            id: 3,
+            nome: "Fundo teste 3",
+            valorAtual: 400,
+            valorNecessario: 1500,
+            porcentagem: 50,
+            dataResgate: new Date().toISOString()
+        },
+        
+    ] */
