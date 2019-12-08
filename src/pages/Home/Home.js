@@ -58,7 +58,8 @@ const Home = () => {
 
 export default Home;
 
-    /*const fundos = [ 
+    /* esse array ficava na linha 12
+    const fundos = [ 
         {
             id: 1,
             nome: "Fundo teste 1",
