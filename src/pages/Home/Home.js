@@ -29,6 +29,9 @@ const Home = () => {
 
     const onClose = () => {
         setVisivel(false);
+        database.listarFundos().then(response => {
+            setfundos(response);
+        });
     };
 
 
